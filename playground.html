@@ -17,6 +17,16 @@
         <ul>
             <li v-for="word in listOfWords">{{word}}</li>
         </ul>
+        <hr/>
+        <h1>Counter</h1>
+        <p>{{count}}</p>
+        <button v-on:click="incrementCount">increment count</button>
+        <div>
+            <label for="incrementAmount">Increment by:</label>
+            <input type="number"
+            v-model="incrementAmount"
+             />
+        </div>
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
@@ -27,7 +37,14 @@
                 return {
                     message: 'Hello it works',
                     listOfNumbers: [1,2,3,4,5],
-                    listOfWords: ['One', 'Two', 'Three', 'Four']
+                    listOfWords: ['One', 'Two', 'Three', 'Four'],
+                    count: 10,
+                    incrementAmount : 8,
+                }
+            },
+            methods: {
+                incrementCount(){
+                    this.count += this.incrementAmount
                 }
             }
         })

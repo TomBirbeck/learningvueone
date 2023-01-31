@@ -12,6 +12,11 @@
             <li v-for="character in listOfChars">{{character}}</li>
         </ul>
         <p v-else>{{noCharsMessage}}</p>
+        <p>
+            <span v-for="(character, index) in listOfChars">
+                {{character}}{{index === listOfChars.length -1 ? '' : ', '}}
+            </span>
+        </p>
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
