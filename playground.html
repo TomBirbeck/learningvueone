@@ -18,7 +18,7 @@
             <li v-for="word in listOfWords">{{word}}</li>
         </ul>
         <hr/>
-        <h1>Counter</h1>
+        <h1>{{displayTitle}}</h1>
         <p>{{count}}</p>
         <button v-on:click="incrementCount">increment count</button>
         <div>
@@ -27,6 +27,8 @@
             v-model="incrementAmount"
              />
         </div>
+        <p>{{incrementAmount}}</p>
+        <p>{{optimisedIncrementAmount}}</p>
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
@@ -35,6 +37,7 @@
         const app = createApp({
             data() {
                 return {
+                    counterTitle: 'Counter Standard',
                     message: 'Hello it works',
                     listOfNumbers: [1,2,3,4,5],
                     listOfWords: ['One', 'Two', 'Three', 'Four'],
@@ -42,9 +45,28 @@
                     incrementAmount : 8,
                 }
             },
+            computed: {
+                displayTitle(){
+                    if (this.count > 20) {
+                        return 'Counter Standard - Very Long'
+                    } else {
+                        return 'Counter Standard'
+                    }
+                },
+                optimisedIncrementAmount() {
+                    return this.displayTitle.length * this.incrementAmount
+                }
+            },
             methods: {
                 incrementCount(){
-                    this.count += this.incrementAmount
+                    this.count += this.optimisedIncrementAmount
+                }
+            },
+            watch: {
+                count(newValue){
+                    if (newValue > 20) {
+                        this.counterTitle += ' Very Long'
+                    }
                 }
             }
         })
