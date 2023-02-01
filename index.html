@@ -9,14 +9,20 @@
 <body>
     <div id="app">
         <ul v-if="listOfChars.length > 0">
-            <li v-for="character in listOfChars">{{character}} <button v-on:click="favouriteCharacter(character)">select as favourite</button></li>
+            <li v-for="character in listOfChars">{{character.name}} <button v-on:click="favouriteCharacter(character)">select as favourite</button></li>
         </ul>
         <p v-else>{{noCharsMessage}}</p>
         <h2>Favourite Characters</h2>
         <ul v-if="favouriteList.length > 0">
-            <li v-for="character in favouriteList">{{character}}</li>
+            <li v-for="character in favouriteList">{{character.name}}</li>
         </ul>
         <p v-else>Please select a favourite</p>
+        <h2>New Character</h2>
+        <lable for="character-name">Name</lable>
+        <input type="text" v-model="newCharacter.name" @keyUp.enter="addNewCharacter"/>
+        <pre>
+            {{newCharacter}}
+        </pre>
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
@@ -25,14 +31,25 @@
         const app = createApp({
             data(){
                 return {
-                    listOfChars: ['Steve', 'John', 'Dave'],
+                    listOfChars: [
+                        {name: 'Steve'},
+                        {name:  'John'},
+                        {name: 'Dave'},
+                    ],
                     noCharsMessage: 'No characters found',
-                    favouriteList: []
+                    favouriteList: [],
+                    newCharacter: {
+                        name: ''
+                    }
                 }
             },
             methods: {
                 favouriteCharacter(character){
                     this.favouriteList.push(character)
+                },
+                addNewCharacter(){
+                    this.listOfChars.push(this.newCharacter)
+                    this.newCharacter = {name: ''}
                 }
             }
         })
