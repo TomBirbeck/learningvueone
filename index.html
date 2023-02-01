@@ -23,6 +23,9 @@
         <pre>
             {{newCharacter}}
         </pre>
+
+    <h2>Average Age</h2>
+    <p>{{averageAgeCalculation}}</p>
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
@@ -32,15 +35,23 @@
             data(){
                 return {
                     listOfChars: [
-                        {name: 'Steve'},
-                        {name:  'John'},
-                        {name: 'Dave'},
+                        {name: 'Steve', age: 40},
+                        {name:  'John', age: 30},
+                        {name: 'Dave', age: 23},
                     ],
                     noCharsMessage: 'No characters found',
                     favouriteList: [],
                     newCharacter: {
                         name: ''
-                    }
+                    },
+                    // averageAge: averageAgeCalculation
+                }
+            },
+            computed: {
+                averageAgeCalculation(){
+                    let age = 0
+                    this.listOfChars.map((char)=>{return age = age + char.age})
+                    return age/this.listOfChars.length
                 }
             },
             methods: {
