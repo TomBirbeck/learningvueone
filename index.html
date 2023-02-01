@@ -9,14 +9,14 @@
 <body>
     <div id="app">
         <ul v-if="listOfChars.length > 0">
-            <li v-for="character in listOfChars">{{character}}</li>
+            <li v-for="character in listOfChars">{{character}} <button v-on:click="favouriteCharacter(character)">select as favourite</button></li>
         </ul>
         <p v-else>{{noCharsMessage}}</p>
-        <p>
-            <span v-for="(character, index) in listOfChars">
-                {{character}}{{index === listOfChars.length -1 ? '' : ', '}}
-            </span>
-        </p>
+        <h2>Favourite Characters</h2>
+        <ul v-if="favouriteList.length > 0">
+            <li v-for="character in favouriteList">{{character}}</li>
+        </ul>
+        <p v-else>Please select a favourite</p>
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
@@ -26,7 +26,13 @@
             data(){
                 return {
                     listOfChars: ['Steve', 'John', 'Dave'],
-                    noCharsMessage: 'No characters found'
+                    noCharsMessage: 'No characters found',
+                    favouriteList: []
+                }
+            },
+            methods: {
+                favouriteCharacter(character){
+                    this.favouriteList.push(character)
                 }
             }
         })
