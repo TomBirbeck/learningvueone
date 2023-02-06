@@ -42,16 +42,17 @@
                     noCharsMessage: 'No characters found',
                     favouriteList: [],
                     newCharacter: {
-                        name: ''
+                        name: '',
+                        age: 0
                     },
-                    // averageAge: averageAgeCalculation
                 }
             },
             computed: {
                 averageAgeCalculation(){
-                    let age = 0
-                    this.listOfChars.map((char)=>{return age = age + char.age})
-                    return age/this.listOfChars.length
+                    let ages = []
+                    this.listOfChars.map((char)=>{return ages.push(char.age)})
+                    let age = ages.reduce((a,b)=>{return a + b}, 0)
+                    return age/ages.length
                 }
             },
             methods: {
