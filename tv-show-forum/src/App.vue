@@ -1,38 +1,40 @@
 <script>
+import AverageAge from './components/icons/AverageAge.vue'
 export default {
-       data(){
-                return {
-                    listOfChars: [
-                        {name: 'Steve', age: 40},
-                        {name:  'John', age: 30},
-                        {name: 'Dave', age: 23},
-                    ],
-                    noCharsMessage: 'No characters found',
-                    favouriteList: [],
-                    newCharacter: {
-                        name: '',
-                        age: 0
-                    },
-                }
+    data() {
+        return {
+            listOfChars: [
+                { name: "Steve", age: 40 },
+                { name: "John", age: 30 },
+                { name: "Dave", age: 23 },
+            ],
+            noCharsMessage: "No characters found",
+            favouriteList: [],
+            newCharacter: {
+                name: "",
+                age: 0
             },
-            computed: {
-                averageAgeCalculation(){
-                    let ages = []
-                    this.listOfChars.map((char)=>{return ages.push(char.age)})
-                    let age = ages.reduce((a,b)=>{return a + b}, 0)
-                    return age/ages.length
-                }
-            },
-            methods: {
-                favouriteCharacter(character){
-                    this.favouriteList.push(character)
-                },
-                addNewCharacter(){
-                    this.listOfChars.push(this.newCharacter)
-                    this.newCharacter = {name: ''}
-                }
-            }
-          }
+        };
+    },
+    // computed: {
+    //     averageAgeCalculation(){
+    //         let ages = []
+    //         this.listOfChars.map((char)=>{return ages.push(char.age)})
+    //         let age = ages.reduce((a,b)=>{return a + b}, 0)
+    //         return age/ages.length
+    //     }
+    // },
+    methods: {
+        favouriteCharacter(character) {
+            this.favouriteList.push(character);
+        },
+        addNewCharacter() {
+            this.listOfChars.push(this.newCharacter);
+            this.newCharacter = { name: "" };
+        }
+    },
+    components:  {AverageAge} 
+}
 </script>
 
 <template>
@@ -42,7 +44,7 @@ export default {
         <p v-else>{{noCharsMessage}}</p>
         <h2>Favourite Characters</h2>
         <ul v-if="favouriteList.length > 0">
-            <li v-for="(character, index) in favouriteList" v-bind:key="`charcter-${index}`">{{character.name}}</li>
+            <li v-for="(character, index) in favouriteList" v-bind:key="`charcter-${i}`">{{character.name}}</li>
         </ul>
         <p v-else>Please select a favourite</p>
         <h2>New Character</h2>
@@ -51,9 +53,9 @@ export default {
         <pre>
             {{newCharacter}}
         </pre>
-
-    <h2>Average Age</h2>
-    <p>{{averageAgeCalculation}}</p>
+        <AverageAge v-bind:characters="listOfChars"/>
+    <!-- <h2>Average Age</h2> -->
+    <!-- <p>{{averageAgeCalculation}}</p> -->
 </template>
 
 <style scoped>
