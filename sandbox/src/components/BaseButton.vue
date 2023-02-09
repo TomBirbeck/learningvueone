@@ -1,8 +1,8 @@
 <script>
 export default {
     props: {
-        text: String,
-        icon: String,
+       left: Boolean,
+       default: false,
     }
 }
 </script>
@@ -10,8 +10,7 @@ export default {
 <template>
     <!-- <button>{{ icon }} - {{ text }}</button> -->
     <button>
-        <slot>
-            Submit
-        </slot>
+        <slot v-if="left">Icon Left - Cancel</slot>
+        <slot v-else>Submit</slot>
     </button>
 </template>

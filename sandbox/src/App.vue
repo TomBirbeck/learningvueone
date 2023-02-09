@@ -19,8 +19,7 @@ export default {
 </script>
 
 <template>
-  <BaseButton>
-    Arrow Left - Hi
+  <BaseButton :left="true">
   </BaseButton>
   <BaseCounter/>
   <hr/>
