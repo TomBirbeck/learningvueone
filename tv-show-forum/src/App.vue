@@ -1,5 +1,6 @@
 <script>
-import AverageAge from './components/icons/AverageAge.vue'
+import AverageAge from './components/AverageAge.vue'
+import CharacterCard from './components/CharacterCard.vue';
 export default {
     data() {
         return {
@@ -16,35 +17,31 @@ export default {
             },
         };
     },
-    // computed: {
-    //     averageAgeCalculation(){
-    //         let ages = []
-    //         this.listOfChars.map((char)=>{return ages.push(char.age)})
-    //         let age = ages.reduce((a,b)=>{return a + b}, 0)
-    //         return age/ages.length
-    //     }
-    // },
     methods: {
-        favouriteCharacter(character) {
-            this.favouriteList.push(character);
+        addFavouriteCharacter(payload) {
+            this.favouriteList.push(payload);
         },
         addNewCharacter() {
             this.listOfChars.push(this.newCharacter);
             this.newCharacter = { name: "" };
         }
     },
-    components:  {AverageAge} 
+    components:  {AverageAge, CharacterCard} 
 }
 </script>
 
 <template>
     <ul v-if="listOfChars.length > 0">
-            <li v-for="character in listOfChars">{{character.name}} <button v-on:click="favouriteCharacter(character)">select as favourite</button></li>
+      <li v-for="(character, index) in listOfChars"
+      :key="`character-${index}`">
+        <CharacterCard v-bind:character="character"
+        @favourite="addFavouriteCharacter"/>
+      </li>
         </ul>
         <p v-else>{{noCharsMessage}}</p>
         <h2>Favourite Characters</h2>
         <ul v-if="favouriteList.length > 0">
-            <li v-for="(character, index) in favouriteList" v-bind:key="`charcter-${i}`">{{character.name}}</li>
+            <li v-for="(character, index) in favouriteList" v-bind:key="`character-${i}`">{{character.name}}</li>
         </ul>
         <p v-else>Please select a favourite</p>
         <h2>New Character</h2>
