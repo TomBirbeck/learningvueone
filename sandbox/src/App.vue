@@ -1,9 +1,11 @@
 <script>
 import BaseCounter from './components/BaseCounter.vue'
+import BaseButton from './components/BaseButton.vue'
 
 export default {
   components: {
     BaseCounter,
+    BaseButton
   },
   data() {
                 return {
@@ -17,6 +19,9 @@ export default {
 </script>
 
 <template>
+  <BaseButton>
+    Arrow Left - Hi
+  </BaseButton>
   <BaseCounter/>
   <hr/>
       <p v-if="message.length % 2 === 0">Even: {{message.toUpperCase()}}</p>
