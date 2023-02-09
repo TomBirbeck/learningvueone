@@ -1,11 +1,13 @@
 <script>
 import BaseCounter from './components/BaseCounter.vue'
 import BaseButton from './components/BaseButton.vue'
+import BaseLayout from './components/BaseLayout.vue'
 
 export default {
   components: {
     BaseCounter,
-    BaseButton
+    BaseButton,
+    BaseLayout
   },
   data() {
                 return {
@@ -19,15 +21,23 @@ export default {
 </script>
 
 <template>
-  <BaseButton :left="true">
-  </BaseButton>
-  <BaseCounter/>
-  <hr/>
-      <p v-if="message.length % 2 === 0">Even: {{message.toUpperCase()}}</p>
-        <p v-else>Odd: {{message}}</p>
-        <ul>
-            <li v-for="(number, index) in listOfNumbers" v-bind:key="`number-${index}`">{{number}}</li>
-        </ul>
+  <BaseLayout>
+    <template v-slot:sidebar>
+      <BaseButton :left="true">
+      </BaseButton>
+    </template>
+    <template v-slot:main>
+      <hr/>
+          <p v-if="message.length % 2 === 0">Even: {{message.toUpperCase()}}</p>
+            <p v-else>Odd: {{message}}</p>
+            <ul>
+                <li v-for="(number, index) in listOfNumbers" v-bind:key="`number-${index}`">{{number}}</li>
+            </ul>
+    </template>
+    <template #footer>
+      <BaseCounter/>
+    </template>
+  </BaseLayout>
         <ul>
             <li v-for="(word, index) in listOfWords" v-bind:key="`word-${index}`">{{word}}</li>
         </ul>
