@@ -12,6 +12,10 @@ export default {
       ).then((response) => response.json());
     },
   },
+  //   created() {
+  //     this.fetchPokemon();
+  //   },
+  // this would run the method after the initial creation of pokedex.
 };
 </script>
 
