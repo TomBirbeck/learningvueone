@@ -1,5 +1,12 @@
 <script>
 export default {
+  setup() {
+    const regionName = 'Europe';
+
+    return {
+      regionName,
+    };
+  },
   data: () => ({
     userList: [1, 2, 3],
   }),
@@ -12,6 +19,7 @@ export default {
   },
   created() {
     this.fetchUsers();
+    console.log(this.regionName);
   },
 };
 </script>

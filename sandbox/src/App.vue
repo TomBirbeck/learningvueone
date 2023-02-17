@@ -2,6 +2,13 @@
 // https://pokemon.co/api/v2/pokemon?limit=151
 
 export default {
+  setup() {
+    const regionName = "Europe";
+
+    return {
+      regionName,
+    };
+  },
   data: () => ({
     pokedex: [1, 2, 3],
   }),
@@ -12,9 +19,10 @@ export default {
       ).then((response) => response.json());
     },
   },
-  //   created() {
-  //     this.fetchPokemon();
-  //   },
+  created() {
+    this.fetchPokemon();
+    console.log(this.regionName);
+  },
   // this would run the method after the initial creation of pokedex.
 };
 </script>
