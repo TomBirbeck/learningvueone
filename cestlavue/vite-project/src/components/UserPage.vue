@@ -1,21 +1,4 @@
 <script>
-// export default {
-//   data: () => ({
-//     users: [],
-//   }),
-//   methods: {
-//     async fetchUsers() {
-//       this.users = await fetch(
-//         "https://jsonplaceholder.typicode.com/users"
-//       ).then((response) => response.json());
-//     },
-//   },
-//     created() {
-//         this.fetchUsers()
-//         console.log("Hello")
-//     }
-//   },
-
 export default {
   data: () => ({
     userList: [1, 2, 3],
@@ -36,7 +19,11 @@ export default {
 <template>
   <main>
     <h1>Users</h1>
-    <pre>{{ userList }}</pre>
+    <ul>
+      <li v-for="user in userList" :key="`user-${user.id}`">
+        {{ user.name }} : {{ user.website }}
+      </li>
+    </ul>
   </main>
 </template>
 
