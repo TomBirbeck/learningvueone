@@ -1,36 +1,19 @@
 <script>
-// https://pokemon.co/api/v2/pokemon?limit=151
+import Pokedex from "./components/Pokedex.vue";
 
 export default {
-  setup() {
-    const regionName = "Europe";
-
-    return {
-      regionName,
-    };
+  components: {
+    Pokedex,
   },
-  data: () => ({
-    pokedex: [1, 2, 3],
-  }),
-  methods: {
-    async fetchPokemon() {
-      this.pokedex = await fetch(
-        "https://pokeapi.co/api/v2/pokemon?limit=151"
-      ).then((response) => response.json());
-    },
-  },
-  created() {
-    this.fetchPokemon();
-    console.log(this.regionName);
-  },
-  // this would run the method after the initial creation of pokedex.
 };
 </script>
 
 <template>
   <h1>New App</h1>
-  <pre>{{ pokedex }}</pre>
-  <button v-on:click="fetchPokemon">Fetch Pokemon</button>
+  <Suspense>
+    <Pokedex />
+    <template v-slot:fallback> Loading Pokedex data </template>
+  </Suspense>
 </template>
 
 <style></style>
