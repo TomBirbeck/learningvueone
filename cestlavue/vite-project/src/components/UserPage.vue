@@ -1,25 +1,26 @@
 <script>
-export default {
-  setup() {
-    const regionName = 'Europe';
+import { reactive } from 'vue';
 
-    return {
-      regionName,
-    };
-  },
-  data: () => ({
-    userList: [1, 2, 3],
-  }),
-  methods: {
-    async fetchUsers() {
-      this.userList = await fetch(
+export default {
+  async setup() {
+    const state = reactive({
+      userList: [],
+    });
+
+    async function fetchUsers() {
+      const response = await fetch(
         'https://jsonplaceholder.typicode.com/users'
       ).then((response) => response.json());
-    },
-  },
-  created() {
-    this.fetchUsers();
-    console.log(this.regionName);
+
+      return response;
+    }
+
+    state.userList = await fetchUsers();
+
+    return {
+      state,
+      fetchUsers,
+    };
   },
 };
 </script>
@@ -28,7 +29,7 @@ export default {
   <main>
     <h1>Users</h1>
     <ul>
-      <li v-for="user in userList" :key="`user-${user.id}`">
+      <li v-for="user in state.userList" :key="`user-${user.id}`">
         {{ user.name }} : {{ user.website }}
       </li>
     </ul>
